@@ -1,0 +1,35 @@
+{
+  "name": "apitest",
+  "version": "1.0.0",
+  "description": "pruebaApi",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesus2419/ApiTest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesus2419/ApiTest/issues"
+  },
+  "homepage": "https://github.com/jesus2419/ApiTest#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.20.1",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.1"
+  },"scripts": {
+  "start": "node src/app.js",
+  "dev": "nodemon src/app.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+}
+}
