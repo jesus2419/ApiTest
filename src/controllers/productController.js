@@ -3,7 +3,34 @@ const pool = require('../utils/db');
 // Función para obtener todos los productos
 const getAllProducts = async (req, res) => {
   try {
-    const { rows } = await pool.query('SELECT * FROM products');
+    const { category, minPrice, maxPrice, page = 1, limit = 10 } = req.query;
+    const offset = (page - 1) * limit;
+
+    let query = 'SELECT * FROM products';
+    const conditions = [];
+    const params = [];
+
+    if (category) {
+      conditions.push(`category = $${params.length + 1}`);
+      params.push(category);
+    }
+    if (minPrice) {
+      conditions.push(`price >= $${params.length + 1}`);
+      params.push(minPrice);
+    }
+    if (maxPrice) {
+      conditions.push(`price <= $${params.length + 1}`);
+      params.push(maxPrice);
+    }
+
+    if (conditions.length > 0) {
+      query += ' WHERE ' + conditions.join(' AND ');
+    }
+
+    query += ` LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+    params.push(limit, offset);
+
+    const { rows } = await pool.query(query, params);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });

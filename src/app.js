@@ -3,6 +3,8 @@ require('dotenv').config(); // Cargar variables de entorno desde .env
 const express = require('express');
 const cors = require('cors');
 const productRoutes = require('./routes/productRoutes'); // Importar rutas de productos
+const inventoryRoutes = require('./routes/inventoryRoutes');
+
 
 // Crear una instancia de Express
 const app = express();
@@ -18,6 +20,8 @@ app.use('/api/products', productRoutes); // Usar las rutas de productos
 app.get('/', (req, res) => {
   res.send('¡Bienvenido a la API de Gestión de Inventario!');
 });
+
+app.use('/api', inventoryRoutes);
 
 // Manejo de errores global
 app.use((err, req, res, next) => {
