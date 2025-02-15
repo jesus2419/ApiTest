@@ -1,5 +1,11 @@
 // Importar dependencias
-require('dotenv').config(); // Cargar variables de entorno desde .env
+const path = require('path')
+
+require('dotenv').config({
+      override:true,
+      path: path.join(__dirname, '../db.env')
+}); // Asegúrate de que esto esté presente
+
 const express = require('express');
 const cors = require('cors');
 const productRoutes = require('./routes/productRoutes'); // Importar rutas de productos
@@ -30,7 +36,7 @@ app.use((err, req, res, next) => {
 });
 
 // Obtener el puerto desde las variables de entorno o usar 3000 por defecto
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 // Iniciar el servidor
 app.listen(PORT, () => {
